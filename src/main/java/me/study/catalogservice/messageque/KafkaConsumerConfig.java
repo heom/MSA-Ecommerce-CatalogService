@@ -22,7 +22,6 @@ public class KafkaConsumerConfig {
 
     @Bean
     public ConsumerFactory<String, String> consumerFactory(){
-        System.out.println(myKafkaProperties);
         Map<String, Object> properties = new HashMap<>();
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, myKafkaProperties.getServers());
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, myKafkaProperties.getGroupId());

@@ -5,7 +5,6 @@ import me.study.catalogservice.entity.CatalogEntity;
 import me.study.catalogservice.exception.CatalogNotFoundException;
 import me.study.catalogservice.exception.StockException;
 import me.study.catalogservice.repository.CatalogRepository;
-import me.study.catalogservice.vo.ResponseCatalog;
 import me.study.catalogservice.vo.ResponseCatalogPage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +25,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Transactional
     @Override
-    public ResponseCatalog minusStock(String productId, Integer qty) {
+    public void updateQty(String productId, Integer qty) {
         CatalogEntity catalogEntity = catalogRepository.findByProductId(productId);
 
         if (catalogEntity == null)
@@ -35,9 +34,7 @@ public class CatalogServiceImpl implements CatalogService {
         if (catalogEntity.getStock() < qty)
             throw new StockException(catalogEntity.getStock());
 
-        if(catalogRepository.minusStock(qty, productId) == 0)
+        if(catalogRepository.updateQty(qty, productId) == 0)
             throw new CatalogNotFoundException(productId);
-
-        return new ResponseCatalog(catalogEntity);
     }
 }

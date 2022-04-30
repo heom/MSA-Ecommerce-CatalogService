@@ -66,7 +66,7 @@ class CatalogRepositoryTest {
         CatalogEntity catalogEntity = catalogRepository.findByProductId(productId);
 
         //when
-        catalogRepository.minusStock(qty, productId);
+        catalogRepository.updateQty(qty, productId);
 
         CatalogEntity updateCatalogEntity = catalogRepository.findByProductId(productId);
 

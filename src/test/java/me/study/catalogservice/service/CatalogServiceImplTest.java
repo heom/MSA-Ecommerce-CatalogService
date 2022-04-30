@@ -48,38 +48,35 @@ class CatalogServiceImplTest {
     }
 
     @Test
-    @DisplayName("minusStock")
-    public void minusStock(){
+    @DisplayName("updateQty")
+    public void updateQty(){
         //given
         String productId = "CATALOG-0001";
         int qty = 0;
 
-        //when
-        ResponseCatalog responseCatalog = catalogService.minusStock(productId, qty);
-
-        //then
-        assertThat(responseCatalog.getProductId()).isEqualTo(productId);
+        //when & then
+        assertDoesNotThrow(()-> catalogService.updateQty(productId, qty));
     }
 
     @Test
-    @DisplayName("minusStock_not_found_catalog")
-    public void minusStock_not_found_catalog(){
+    @DisplayName("updateQty_not_found_catalog")
+    public void updateQty_not_found_catalog(){
         //given
         String productId = "CATALOG-0005";
         int qty = 0;
 
         //when & then
-        assertThrows(CatalogNotFoundException.class, ()-> catalogService.minusStock(productId, qty));
+        assertThrows(CatalogNotFoundException.class, ()-> catalogService.updateQty(productId, qty));
     }
 
     @Test
-    @DisplayName("minusStock_error_qty")
-    public void minusStock_error_qty(){
+    @DisplayName("updateQty_error_qty")
+    public void updateQty_error_qty(){
         //given
         String productId = "CATALOG-0001";
         int qty = 1000;
 
         //when & then
-        assertThrows(StockException.class, ()-> catalogService.minusStock(productId, qty));
+        assertThrows(StockException.class, ()-> catalogService.updateQty(productId, qty));
     }
 }

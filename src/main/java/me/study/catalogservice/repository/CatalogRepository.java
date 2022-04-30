@@ -17,5 +17,5 @@ public interface CatalogRepository extends JpaRepository<CatalogEntity, Long> {
 
     @Modifying(clearAutomatically = true)
     @Query("update CatalogEntity c set c.stock = c.stock - :qty where c.productId = :productId")
-    int minusStock(@Param("qty") int qty, @Param("productId") String productId);
+    int updateQty(@Param("qty") int qty, @Param("productId") String productId);
 }
